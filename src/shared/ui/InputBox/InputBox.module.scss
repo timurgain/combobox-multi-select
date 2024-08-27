@@ -1,0 +1,16 @@
+@import '@/shared/styles/index.scss';
+
+.box {
+  position: relative;
+  border: 1px solid $grey-19_10;
+  border-radius: 8px;
+  width: 100%;
+
+  &_kit_single-select {
+    @extend %flex-row-center-between;
+    gap: rem(10px);
+    padding: rem(11px) rem(12px);
+    max-width: 292px;
+    height: 44px;
+  }
+}

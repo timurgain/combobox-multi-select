@@ -1,0 +1,11 @@
+@import '@/shared/styles/index.scss';
+
+.input {
+  &_kit_clear {
+    @include set-font-size(rem(16px), 1.46);
+    background-color: transparent;
+    border: none;
+    color: $grey-19_40;
+    flex-grow: 1;
+  }
+}

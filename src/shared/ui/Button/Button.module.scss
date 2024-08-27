@@ -1,0 +1,10 @@
+@import '@/shared/styles/index.scss';
+
+.button {
+  display: flex;
+
+  &_kit_clear {
+    background-color: transparent;
+    border: none;
+  }
+}
