@@ -15,6 +15,7 @@ type Props = {
   placeholder?: string;
   className?: string;
   disabled?: boolean;
+  labelFor?: string;
 };
 
 export function Input({
@@ -23,10 +24,12 @@ export function Input({
   placeholder,
   className,
   disabled = false,
+  labelFor,
 }: Props) {
   return (
     <input
       className={clsx(styles.input, styles[`input_kit_${kit}`], className)}
+      id={labelFor}
       type={type}
       placeholder={placeholder ?? ''}
       disabled={disabled}

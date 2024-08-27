@@ -1,0 +1,7 @@
+@import '@/shared/styles/index.scss';
+
+.label {
+  &_kit_default {
+    @include set-font-size(rem(15px, 1.33, 600));
+  }
+}
