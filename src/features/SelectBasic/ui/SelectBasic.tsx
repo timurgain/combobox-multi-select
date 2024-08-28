@@ -1,20 +1,25 @@
+import { useCallback, useState } from 'react';
 import styles from './SelectBasic.module.scss';
+import ShevronIcon from '@/shared/assets/icons/chevron-down.svg?react';
 import { InputBox, InputBoxKits } from '@/shared/ui/InputBox/InputBox';
 import { Input } from '@/shared/ui/Input/Input';
 import { Button, ButtonKits } from '@/shared/ui/Button/Button';
 import { InputLabel } from '@/shared/ui/InputLabel/InputLabel';
-import ShevronIcon from '@/shared/assets/icons/chevron-down.svg?react';
-import { Dropdown, DropdownKits } from '@/shared/ui/Dropdown/Dropdown';
-import { useCallback, useState } from 'react';
-import { SelectBasicOption } from '../types/types';
+import { Dropdown, DropdownKits, DropdownProps } from '@/shared/ui/Dropdown/Dropdown';
+import { OptionDefault, SelectBasicOption } from '@/shared/ui/OptionDefault/OptionDefault';
 
 type Props = {
   value: SelectBasicOption;
   options: SelectBasicOption[];
   onChange: (option: SelectBasicOption) => void;
+  CustomDropdown?: React.ComponentType<Omit<DropdownProps, 'kit'>>;
+  CustomOption?: React.ComponentType;
 };
 
-export function SelectBasic({ value, options, onChange }: Props) {
+export function SelectBasic({ value, options, onChange, CustomDropdown, CustomOption }: Props) {
+  const DropdownComponent = CustomDropdown || Dropdown;
+  const OptionComponent = CustomOption || OptionDefault;
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = useCallback(() => {
@@ -26,7 +31,8 @@ export function SelectBasic({ value, options, onChange }: Props) {
   }, []);
 
   const selectOption = useCallback(
-    (option: SelectBasicOption) => {
+    (option: SelectBasicOption) => (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+      e.stopPropagation();
       onChange(option);
       closeDropdown();
     },
@@ -40,23 +46,17 @@ export function SelectBasic({ value, options, onChange }: Props) {
       <InputBox kit={InputBoxKits.SINGLE_SELECT} onBlur={closeDropdown} onClick={toggleDropdown}>
         <Input value={value?.label} placeholder="Type here" labelFor="select-input-basic" />
         <Button kit={ButtonKits.CLEAR}>
-          <ShevronIcon />
+          <ShevronIcon
+            style={isOpen ? { transform: 'rotate(180deg)' } : { transform: 'rotate(0deg)' }}
+          />
         </Button>
       </InputBox>
 
-      <Dropdown kit={DropdownKits.SINGLE_SELECT} isOpen={isOpen}>
+      <DropdownComponent kit={DropdownKits.SINGLE_SELECT} isOpen={isOpen}>
         {options.map((option) => (
-          <li
-            key={option.value}
-            onClick={(e) => {
-              e.stopPropagation();
-              selectOption(option);
-            }}
-          >
-            {option.label}
-          </li>
+          <OptionComponent key={option.value} option={option} onClick={selectOption(option)} />
         ))}
-      </Dropdown>
+      </DropdownComponent>
     </section>
   );
 }

@@ -1,12 +1,12 @@
 @import '@/shared/styles/index.scss';
 
 .dropdown {
-  @extend %flex-col-center-start;
+  @extend %flex-col-start-start;
   padding: rem(4px);
   gap: rem(4px);
   width: 100%;
   min-height: 42px;
-  overflow-y: auto;
+  overflow-y: scroll;
   box-shadow: 0px 16px 64px -4px $grey-22_08;
   border: 1px solid $grey-19_05;
   border-radius: 8px;

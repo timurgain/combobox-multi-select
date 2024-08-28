@@ -1,5 +1,5 @@
 import { SelectBasic } from '@/features/SelectBasic';
-import { SelectBasicOption } from '@/features/SelectBasic/types/types';
+import { SelectBasicOption } from '@/shared/ui/OptionDefault/OptionDefault';
 import { useState } from 'react';
 
 const options = [

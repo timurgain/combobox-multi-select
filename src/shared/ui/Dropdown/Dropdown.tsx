@@ -5,13 +5,13 @@ export enum DropdownKits {
   SINGLE_SELECT = 'single-select',
 }
 
-type Props = {
+export type DropdownProps = {
   kit?: DropdownKits;
   isOpen: boolean;
   children: React.ReactNode;
 };
 
-export function Dropdown({ kit, isOpen, children }: Props) {
+export function Dropdown({ kit, isOpen, children }: DropdownProps) {
   return (
     <ul
       className={clsx(styles.dropdown, styles[`dropdown_kit_${kit}`], {
