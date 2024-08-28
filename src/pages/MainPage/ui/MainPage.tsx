@@ -1,10 +1,10 @@
 import styles from './MainPage.module.scss';
-import { SelectBasicDemo } from '@/widgets/SelectBasicDemo';
+import { SelectBasic } from '@/widgets/SelectBasic';
 
 export function MainPage() {
   return (
     <main className={styles.main}>
-      <SelectBasicDemo />
+      <SelectBasic />
     </main>
   );
 }

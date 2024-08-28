@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import styles from './Dropdown.module.scss';
+import styles from './DropdownDefault.module.scss';
 
 export enum DropdownKits {
   SINGLE_SELECT = 'single-select',
@@ -11,7 +11,7 @@ export type DropdownProps = {
   children: React.ReactNode;
 };
 
-export function Dropdown({ kit, isOpen, children }: DropdownProps) {
+export function DropdownDefault({ kit, isOpen, children }: DropdownProps) {
   return (
     <ul
       className={clsx(styles.dropdown, styles[`dropdown_kit_${kit}`], {

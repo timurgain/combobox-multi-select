@@ -1,4 +1,4 @@
-import { SelectBasic } from '@/features/SelectBasic';
+import { Select } from '@/features/Select';
 import { SelectBasicOption } from '@/shared/ui/OptionDefault/OptionDefault';
 import { useState } from 'react';
 
@@ -10,12 +10,12 @@ const options = [
   { value: '5', label: 'Option 5' },
 ];
 
-export function SelectBasicDemo() {
+export function SelectBasic() {
   const [option, setOption] = useState<SelectBasicOption>(options[0]);
 
   return (
     <>
-      <SelectBasic
+      <Select
         value={option}
         options={options}
         onChange={(option: SelectBasicOption) => {
