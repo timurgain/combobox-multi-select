@@ -8,12 +8,17 @@ export enum ButtonKits {
 type Props = {
   kit?: ButtonKits;
   type?: 'button' | 'submit' | 'reset';
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
 };
 
-export function Button({ kit = ButtonKits.CLEAR, type = 'button', children }: Props) {
+export function Button({ onClick, kit = ButtonKits.CLEAR, type = 'button', children }: Props) {
   return (
-    <button type={type} className={clsx(styles.button, styles[`button_kit_${kit}`])}>
+    <button
+      onClick={onClick}
+      type={type}
+      className={clsx(styles.button, styles[`button_kit_${kit}`])}
+    >
       {children}
     </button>
   );

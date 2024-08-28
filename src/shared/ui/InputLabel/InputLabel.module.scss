@@ -2,6 +2,7 @@
 
 .label {
   &_kit_default {
-    @include set-font-size(rem(15px, 1.33, 600));
+    @include set-font-size(rem(15px), 1.33, 600);
+    color: $grey-19_90;
   }
 }

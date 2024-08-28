@@ -7,9 +7,15 @@ export enum InputBoxKits {
 
 type Props = {
   kit?: InputBoxKits;
+  onClick?: () => void;
+  onBlur?: () => void;
   children: React.ReactNode;
 };
 
-export function InputBox({ kit, children }: Props) {
-  return <div className={clsx(styles.box, styles[`box_kit_${kit}`])}>{children}</div>;
+export function InputBox({ kit, onClick, onBlur, children }: Props) {
+  return (
+    <div className={clsx(styles.box, styles[`box_kit_${kit}`])} onClick={onClick} onBlur={onBlur}>
+      {children}
+    </div>
+  );
 }

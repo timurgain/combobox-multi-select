@@ -1,0 +1,6 @@
+@import '@/shared/styles/index.scss';
+
+.section {
+  @extend %flex-col-center-start;
+  gap: 8px;
+}
