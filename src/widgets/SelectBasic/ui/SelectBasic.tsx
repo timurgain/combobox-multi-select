@@ -1,5 +1,4 @@
 import { Select } from '@/features/Select';
-import { SelectBasicOption } from '@/shared/ui/OptionDefault/OptionDefault';
 import { useState } from 'react';
 
 const options = [
@@ -11,19 +10,19 @@ const options = [
 ];
 
 export function SelectBasic() {
-  const [option, setOption] = useState<SelectBasicOption>(options[0]);
+  const [value, setValue] = useState<(typeof options)[0]>(options[0]);
 
   return (
     <article>
-      <Select
+      <Select<(typeof options)[0]>
         isMultiple={false}
-        value={option}
+        value={value}
         options={options}
-        onChange={(option: SelectBasicOption) => {
-          setOption(option);
+        onChange={(option) => {
+          setValue(option);
         }}
       />
-      <p style={{ marginTop: '30px' }}>Selected: {option.label}</p>
+      <p style={{ marginTop: '30px' }}>Selected: {value.label}</p>
     </article>
   );
 }

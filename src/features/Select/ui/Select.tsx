@@ -1,5 +1,6 @@
 import styles from './Select.module.scss';
 import ShevronIcon from '@/shared/assets/icons/chevron-down.svg?react';
+import SearchIcon from '@/shared/assets/icons/search.svg?react';
 import { InputBox, InputBoxKits } from '@/shared/ui/InputBox/InputBox';
 import { Input } from '@/shared/ui/Input/Input';
 import { Button, ButtonKits } from '@/shared/ui/Button/Button';
@@ -9,7 +10,7 @@ import {
   DropdownKits,
   DropdownProps,
 } from '@/shared/ui/DropdownDefault/DropdownDefault';
-import { OptionDefault } from '@/shared/ui/OptionDefault/OptionDefault';
+import { BasicOption, OptionDefault } from '@/shared/ui/OptionDefault/OptionDefault';
 import { useSelectComponent } from '../hooks/useSelectComponent';
 
 type SingleProps<T> = {
@@ -32,11 +33,6 @@ type MultiProps<T> = {
 
 type Props<T> = SingleProps<T> | MultiProps<T>;
 
-interface BasicOption {
-  value: string | number;
-  label: string;
-}
-
 export function Select<T extends BasicOption>({
   isMultiple,
   value,
@@ -50,32 +46,59 @@ export function Select<T extends BasicOption>({
   const handleChange = (option: T | T[]) =>
     isMultiple ? onChange(option as T[]) : onChange(option as T);
 
-  const { isOpen, toggleDropdown, closeDropdown, selectOption, isOptionSelected } =
-    useSelectComponent({ isMultiple, handleChange });
+  const {
+    isOpen,
+    inputValue,
+    handleInputChange,
+    placeholderValue,
+    filteredOptions,
+    toggleDropdown,
+    closeDropdown,
+    selectOption,
+    isOptionSelected,
+  } = useSelectComponent<T>({ value, options, isMultiple, handleChange });
 
   return (
     <section className={styles.section}>
       <InputLabel text="Title" htmlFor="select-input-basic" />
 
-      <InputBox kit={InputBoxKits.SINGLE_SELECT} onBlur={closeDropdown} onClick={toggleDropdown}>
+      <InputBox
+        kit={isMultiple ? InputBoxKits.MULTI_SELECT : InputBoxKits.SINGLE_SELECT}
+        onBlur={closeDropdown}
+        onClick={toggleDropdown}
+      >
+        {isMultiple && value.length < 1 && <SearchIcon />}
+
         {isMultiple ? (
           <>
             {value?.map((v) => <span key={v.value}>{v.label}</span>)}
-            <Input value={''} placeholder="Type here" labelFor="select-input-basic" />
+            <Input
+              value={inputValue}
+              onChange={handleInputChange}
+              placeholder="Type here"
+              labelFor="select-input-basic"
+            />
           </>
         ) : (
-          <Input value={value?.label} placeholder="Type here" labelFor="select-input-basic" />
+          <Input
+            value={inputValue}
+            onChange={handleInputChange}
+            placeholder={placeholderValue}
+            labelFor="select-input-basic"
+          />
         )}
 
-        <Button kit={ButtonKits.CLEAR}>
-          <ShevronIcon
-            style={isOpen ? { transform: 'rotate(180deg)' } : { transform: 'rotate(0deg)' }}
-          />
-        </Button>
+        {!isMultiple && (
+          <Button kit={ButtonKits.CLEAR}>
+            <ShevronIcon
+              style={isOpen ? { transform: 'rotate(180deg)' } : { transform: 'rotate(0deg)' }}
+            />
+          </Button>
+        )}
       </InputBox>
 
       <Dropdown kit={DropdownKits.SINGLE_SELECT} isOpen={isOpen}>
-        {options.map((option) => (
+        {filteredOptions.map((option) => (
           <Option
             key={option.value}
             option={option}

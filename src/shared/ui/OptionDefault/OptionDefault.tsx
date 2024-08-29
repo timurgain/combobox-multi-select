@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import styles from './OptionDefault.module.scss';
 
-export type SelectBasicOption = {
-  value: string | number;
+export type BasicOption = {
+  value: string;
   label: string;
 };
 
 type Props = {
-  option: SelectBasicOption;
+  option: BasicOption;
   onClick: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   isSelected?: boolean;
 };

@@ -3,6 +3,7 @@ import clsx from 'clsx';
 
 export enum InputBoxKits {
   SINGLE_SELECT = 'single-select',
+  MULTI_SELECT = 'multi-select',
 }
 
 type Props = {

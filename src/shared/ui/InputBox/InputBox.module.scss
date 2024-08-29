@@ -13,4 +13,13 @@
     max-width: 292px;
     height: 44px;
   }
+
+  &_kit_multi-select {
+    @extend %flex-row-center-start;
+    flex-wrap: wrap;
+    gap: rem(10px);
+    padding: rem(8px) rem(8px);
+    max-width: 450px;
+    min-height: 44px;
+  }
 }
