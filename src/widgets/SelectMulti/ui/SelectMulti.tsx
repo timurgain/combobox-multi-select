@@ -10,20 +10,25 @@ const options = [
   { value: '5', label: 'Option 5' },
 ];
 
-export function SelectBasic() {
-  const [option, setOption] = useState<SelectBasicOption>(options[0]);
+export function SelectMulti() {
+  const [value, setValue] = useState<SelectBasicOption[]>([]);
 
   return (
     <article>
       <Select
-        isMultiple={false}
-        value={option}
+        isMultiple={true}
+        value={value}
         options={options}
-        onChange={(option: SelectBasicOption) => {
-          setOption(option);
+        onChange={(option: SelectBasicOption[]) => {
+          setValue(option);
         }}
       />
-      <p style={{ marginTop: '30px' }}>Selected: {option.label}</p>
+      <p style={{ marginTop: '30px' }}>
+        Selected:{' '}
+        {value.map((v) => (
+          <span>{v.label}</span>
+        ))}
+      </p>
     </article>
   );
 }
