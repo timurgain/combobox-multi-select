@@ -20,6 +20,7 @@
 
   &__label {
     @include set-font-size(rem(15px), 1.46);
+    @extend %text-overflow-ellipsis;
     padding: rem(7px) rem(12px);
     color: $grey-19_90;
   }

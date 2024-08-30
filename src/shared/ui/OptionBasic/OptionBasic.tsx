@@ -1,16 +1,13 @@
 import clsx from 'clsx';
 import styles from './OptionBasic.module.scss';
+import { OptionComponentPropsType } from '@/shared/types';
 
 export type OptionBasicType = {
   value: string;
   label: string;
 };
 
-type Props = {
-  option: OptionBasicType;
-  onClick: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
-  isSelected?: boolean;
-};
+type Props = OptionComponentPropsType<OptionBasicType>;
 
 export function OptionBasic({ option, onClick, isSelected }: Props) {
   return (

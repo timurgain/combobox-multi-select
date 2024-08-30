@@ -1,4 +1,5 @@
 import { Select } from '@/features/Select';
+import { OptionBasicType } from '@/shared/ui/OptionBasic/OptionBasic';
 import { useState } from 'react';
 
 const options = [
@@ -18,7 +19,8 @@ export function SelectMulti() {
 
   return (
     <article>
-      <Select<(typeof options)[0]>
+      <Select<OptionBasicType>
+        title="Multi Select"
         isMultiple={true}
         value={value}
         options={options}

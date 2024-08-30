@@ -4,43 +4,21 @@ import SearchIcon from '@/shared/assets/icons/search.svg?react';
 import { InputBox, InputBoxKits } from '@/shared/ui/InputBox/InputBox';
 import { Input } from '@/shared/ui/Input/Input';
 import { Button, ButtonKits } from '@/shared/ui/Button/Button';
-import { InputLabel } from '@/shared/ui/InputLabel/InputLabel';
-import {
-  DropdownDefault,
-  DropdownKits,
-  DropdownProps,
-} from '@/shared/ui/DropdownDefault/DropdownDefault';
+import { DropdownDefault, DropdownKits } from '@/shared/ui/DropdownDefault/DropdownDefault';
 import { OptionBasic, OptionBasicType } from '@/shared/ui/OptionBasic/OptionBasic';
 import { useSelectComponent } from '../hooks/useSelectComponent';
-
-type SingleProps<T> = {
-  isMultiple?: false;
-  value: T;
-  options: T[];
-  onChange: (option: T) => void;
-  CustomDropdown?: React.ComponentType<Omit<DropdownProps, 'kit'>>;
-  CustomOption?: React.ComponentType;
-};
-
-type MultiProps<T> = {
-  isMultiple: true;
-  value: T[];
-  options: T[];
-  onChange: (option: T[]) => void;
-  CustomDropdown?: React.ComponentType<Omit<DropdownProps, 'kit'>>;
-  CustomOption?: React.ComponentType;
-};
-
-type Props<T> = SingleProps<T> | MultiProps<T>;
+import { TitleLabel } from '@/shared/ui/InputLabel/TitleLabel';
+import { SelectProps } from '../types';
 
 export function Select<T extends OptionBasicType>({
+  title,
   isMultiple,
   value,
   options,
   onChange,
   CustomDropdown,
   CustomOption,
-}: Props<T>) {
+}: SelectProps<T>) {
   const Dropdown = CustomDropdown || DropdownDefault;
   const Option = CustomOption || OptionBasic;
   const handleChange = (option: T | T[]) =>
@@ -60,14 +38,14 @@ export function Select<T extends OptionBasicType>({
 
   return (
     <section className={styles.section}>
-      <InputLabel text="Title" htmlFor="select-input-basic" />
+      <TitleLabel text={title} htmlFor="select-input-basic" />
 
       <InputBox
         kit={isMultiple ? InputBoxKits.MULTI_SELECT : InputBoxKits.SINGLE_SELECT}
         onBlur={closeDropdown}
         onClick={toggleDropdown}
       >
-        {isMultiple && value.length < 1 && <SearchIcon />}
+        {isMultiple && Array.isArray(value) && value.length < 1 && <SearchIcon />}
 
         {isMultiple ? (
           <>
