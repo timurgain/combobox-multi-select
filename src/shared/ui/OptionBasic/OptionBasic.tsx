@@ -1,18 +1,18 @@
 import clsx from 'clsx';
-import styles from './OptionDefault.module.scss';
+import styles from './OptionBasic.module.scss';
 
-export type BasicOption = {
+export type OptionBasicType = {
   value: string;
   label: string;
 };
 
 type Props = {
-  option: BasicOption;
+  option: OptionBasicType;
   onClick: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   isSelected?: boolean;
 };
 
-export function OptionDefault({ option, onClick, isSelected }: Props) {
+export function OptionBasic({ option, onClick, isSelected }: Props) {
   return (
     <li
       onClick={onClick}

@@ -39,6 +39,7 @@ export function Input({
       placeholder={placeholder ?? ''}
       disabled={disabled}
       id={labelFor}
+      autoComplete="off"
     />
   );
 }

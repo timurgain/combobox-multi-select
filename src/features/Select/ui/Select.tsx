@@ -10,7 +10,7 @@ import {
   DropdownKits,
   DropdownProps,
 } from '@/shared/ui/DropdownDefault/DropdownDefault';
-import { BasicOption, OptionDefault } from '@/shared/ui/OptionDefault/OptionDefault';
+import { OptionBasic, OptionBasicType } from '@/shared/ui/OptionBasic/OptionBasic';
 import { useSelectComponent } from '../hooks/useSelectComponent';
 
 type SingleProps<T> = {
@@ -33,7 +33,7 @@ type MultiProps<T> = {
 
 type Props<T> = SingleProps<T> | MultiProps<T>;
 
-export function Select<T extends BasicOption>({
+export function Select<T extends OptionBasicType>({
   isMultiple,
   value,
   options,
@@ -42,7 +42,7 @@ export function Select<T extends BasicOption>({
   CustomOption,
 }: Props<T>) {
   const Dropdown = CustomDropdown || DropdownDefault;
-  const Option = CustomOption || OptionDefault;
+  const Option = CustomOption || OptionBasic;
   const handleChange = (option: T | T[]) =>
     isMultiple ? onChange(option as T[]) : onChange(option as T);
 

@@ -1,15 +1,15 @@
-import { BasicOption } from '@/shared/ui/OptionDefault/OptionDefault';
+import { OptionBasicType } from '@/shared/ui/OptionBasic/OptionBasic';
 import { debounce } from '@/shared/utils';
 import { useCallback, useEffect, useState } from 'react';
 
-type Props<T extends BasicOption> = {
+type Props<T extends OptionBasicType> = {
   value: T | T[];
   options: T[];
   isMultiple?: boolean;
   handleChange: (option: T | T[]) => void;
 };
 
-export function useSelectComponent<T extends BasicOption>({
+export function useSelectComponent<T extends OptionBasicType>({
   value,
   options,
   isMultiple,
