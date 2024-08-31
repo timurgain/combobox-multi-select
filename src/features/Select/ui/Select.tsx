@@ -1,6 +1,7 @@
 import styles from './Select.module.scss';
 import ShevronIcon from '@/shared/assets/icons/chevron-down.svg?react';
 import SearchIcon from '@/shared/assets/icons/search.svg?react';
+import AddIcon from '@/shared/assets/icons/add-on.svg?react';
 import { InputBox, InputBoxKits } from '@/shared/ui/InputBox/InputBox';
 import { Input } from '@/shared/ui/Input/Input';
 import { Button, ButtonKits } from '@/shared/ui/Button/Button';
@@ -16,6 +17,7 @@ export function Select<T extends OptionBasicType>({
   isMultiple,
   value,
   options,
+  postOption,
   onChange,
   CustomTag,
   CustomOption,
@@ -25,7 +27,7 @@ export function Select<T extends OptionBasicType>({
   const Option = CustomOption || OptionBasic;
   const Dropdown = CustomDropdown || DropdownDefault;
 
-  const handleChange = (option: T | T[]) =>
+  const updSelected = (option: T | T[]) =>
     isMultiple ? onChange(option as T[]) : onChange(option as T);
 
   const {
@@ -39,7 +41,8 @@ export function Select<T extends OptionBasicType>({
     closeDropdown,
     handleOptionClick,
     isOptionSelected,
-  } = useSelectComponent<T>({ value, options, isMultiple, handleChange });
+    createOption,
+  } = useSelectComponent<T>({ value, options, isMultiple, updSelected, postOption });
 
   return (
     <section className={styles.section}>
@@ -90,6 +93,23 @@ export function Select<T extends OptionBasicType>({
             isSelected={isOptionSelected(option)}
           />
         ))}
+
+        {!filteredOptions.length && postOption && inputValue && (
+          <Button
+            kit={ButtonKits.CLEAR}
+            className={styles['add-on']}
+            onClick={() => createOption(inputValue)}
+          >
+            <AddIcon />
+            <p>Создать «{inputValue}»</p>
+          </Button>
+        )}
+
+        {!filteredOptions.length && !postOption && inputValue && (
+          <div className={styles['add-on']}>
+            <p>Не найдено «{inputValue}»</p>
+          </div>
+        )}
       </Dropdown>
     </section>
   );

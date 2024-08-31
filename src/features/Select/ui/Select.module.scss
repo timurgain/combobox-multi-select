@@ -4,3 +4,18 @@
   @extend %flex-col-center-start;
   gap: 8px;
 }
+
+.add-on {
+  @extend %flex-row-center-start;
+  @include set-font-size(rem(15px), 1.46);
+  color: $grey-19_90;
+  gap: 8px;
+  width: 100%;
+  height: auto;
+  padding: rem(6px) rem(12px);
+
+  & > p {
+    @extend %text-overflow-ellipsis;
+    flex: 1;
+  }
+}

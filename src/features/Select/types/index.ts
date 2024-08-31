@@ -6,6 +6,7 @@ export type SingleProps<T> = {
   isMultiple?: false;
   value: T | null;
   options: T[];
+  postOption?: (option: T) => void;
   onChange: (option: T) => void;
   CustomTag?: React.ComponentType<TagComponentPropsType<T>>;
   CustomOption?: React.ComponentType<OptionComponentPropsType<T>>;
@@ -17,6 +18,7 @@ export type MultiProps<T> = {
   isMultiple: true;
   value: T[] | null;
   options: T[];
+  postOption?: (option: T) => void;
   onChange: (option: T[]) => void;
   CustomTag?: React.ComponentType<TagComponentPropsType<T>>;
   CustomOption?: React.ComponentType<OptionComponentPropsType<T>>;

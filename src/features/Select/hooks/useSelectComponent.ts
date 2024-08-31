@@ -6,14 +6,16 @@ type Props<T extends OptionBasicType> = {
   value: T | T[] | null;
   options: T[];
   isMultiple?: boolean;
-  handleChange: (option: T | T[]) => void;
+  updSelected: (option: T | T[]) => void;
+  postOption?: (option: T) => void;
 };
 
 export function useSelectComponent<T extends OptionBasicType>({
   value,
   options,
   isMultiple,
-  handleChange,
+  updSelected,
+  postOption,
 }: Props<T>) {
   const FILTER_OPTIONS_DELEAY = 200;
   const [isOpen, setIsOpen] = useState(false);
@@ -50,7 +52,7 @@ export function useSelectComponent<T extends OptionBasicType>({
   const toggleSelection = useCallback(
     (option: T) => {
       if (!isMultiple && !Array.isArray(value)) {
-        handleChange(option);
+        updSelected(option);
         setPlaceholderValue(option.label);
       }
 
@@ -58,10 +60,10 @@ export function useSelectComponent<T extends OptionBasicType>({
         const newValue = value.some((v) => v.value === option.value)
           ? value.filter((v) => v.value !== option.value)
           : [...value, option];
-        handleChange(newValue);
+        updSelected(newValue);
       }
     },
-    [handleChange, isMultiple, value]
+    [updSelected, isMultiple, value]
   );
 
   const handleOptionClick = useCallback(
@@ -82,6 +84,20 @@ export function useSelectComponent<T extends OptionBasicType>({
     [isMultiple, value]
   );
 
+  const createOption = useCallback(
+    (inputValue: string) => {
+      if (!postOption) return;
+      const newOption = {
+        value: inputValue,
+        label: inputValue,
+      } as T;
+      postOption(newOption);
+      toggleSelection(newOption);
+      setInputValue('');
+    },
+    [postOption, toggleSelection]
+  );
+
   return {
     isOpen,
     inputValue,
@@ -93,5 +109,6 @@ export function useSelectComponent<T extends OptionBasicType>({
     closeDropdown,
     handleOptionClick,
     isOptionSelected,
+    createOption,
   };
 }
