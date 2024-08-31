@@ -47,32 +47,39 @@ export function useSelectComponent<T extends OptionBasicType>({
     setIsOpen(false);
   }, []);
 
-  const selectOption = useCallback(
-    (option: T, value: T | T[] | null) => (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-      e.stopPropagation();
-
+  const toggleSelection = useCallback(
+    (option: T) => {
       if (!isMultiple && !Array.isArray(value)) {
         handleChange(option);
         setPlaceholderValue(option.label);
       }
+
       if (isMultiple && Array.isArray(value)) {
         const newValue = value.some((v) => v.value === option.value)
           ? value.filter((v) => v.value !== option.value)
           : [...value, option];
         handleChange(newValue);
       }
+    },
+    [handleChange, isMultiple, value]
+  );
+
+  const handleOptionClick = useCallback(
+    (option: T) => (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+      e.stopPropagation();
+      toggleSelection(option);
       closeDropdown();
       setInputValue('');
     },
-    [isMultiple, handleChange, closeDropdown]
+    [toggleSelection, closeDropdown]
   );
 
   const isOptionSelected = useCallback(
-    (option: T, value: T | T[] | null) => {
+    (option: T) => {
       if (!isMultiple && !Array.isArray(value)) return value?.value === option.value;
       if (isMultiple && Array.isArray(value)) return value.some((v) => v.value === option.value);
     },
-    [isMultiple]
+    [isMultiple, value]
   );
 
   return {
@@ -81,9 +88,10 @@ export function useSelectComponent<T extends OptionBasicType>({
     handleInputChange,
     placeholderValue,
     filteredOptions,
+    toggleSelection,
     toggleDropdown,
     closeDropdown,
-    selectOption,
+    handleOptionClick,
     isOptionSelected,
   };
 }

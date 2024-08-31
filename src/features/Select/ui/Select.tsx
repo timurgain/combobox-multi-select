@@ -9,6 +9,7 @@ import { OptionBasic, OptionBasicType } from '@/shared/ui/OptionBasic/OptionBasi
 import { useSelectComponent } from '../hooks/useSelectComponent';
 import { TitleLabel } from '@/shared/ui/InputLabel/TitleLabel';
 import { SelectProps } from '../types';
+import { Tag as TagDefault } from '@/shared/ui/Tag/Tag';
 
 export function Select<T extends OptionBasicType>({
   title,
@@ -16,11 +17,14 @@ export function Select<T extends OptionBasicType>({
   value,
   options,
   onChange,
-  CustomDropdown,
+  CustomTag,
   CustomOption,
+  CustomDropdown,
 }: SelectProps<T>) {
-  const Dropdown = CustomDropdown || DropdownDefault;
+  const Tag = CustomTag || TagDefault;
   const Option = CustomOption || OptionBasic;
+  const Dropdown = CustomDropdown || DropdownDefault;
+
   const handleChange = (option: T | T[]) =>
     isMultiple ? onChange(option as T[]) : onChange(option as T);
 
@@ -30,15 +34,16 @@ export function Select<T extends OptionBasicType>({
     handleInputChange,
     placeholderValue,
     filteredOptions,
+    toggleSelection,
     toggleDropdown,
     closeDropdown,
-    selectOption,
+    handleOptionClick,
     isOptionSelected,
   } = useSelectComponent<T>({ value, options, isMultiple, handleChange });
 
   return (
     <section className={styles.section}>
-      <TitleLabel text={title} htmlFor="select-input-basic" />
+      <TitleLabel text={title} htmlFor={title.replace(' ', '-').toLowerCase()} />
 
       <InputBox
         kit={isMultiple ? InputBoxKits.MULTI_SELECT : InputBoxKits.SINGLE_SELECT}
@@ -49,12 +54,13 @@ export function Select<T extends OptionBasicType>({
 
         {isMultiple ? (
           <>
-            {value?.map((v) => <span key={v.value}>{v.label}</span>)}
+            {value?.map((v) => <Tag key={v.value} option={v} remove={() => toggleSelection(v)} />)}
+
             <Input
               value={inputValue}
               onChange={handleInputChange}
               placeholder="Type here"
-              labelFor="select-input-basic"
+              labelFor={title.replace(' ', '-').toLowerCase()}
             />
           </>
         ) : (
@@ -80,8 +86,8 @@ export function Select<T extends OptionBasicType>({
           <Option
             key={option.value}
             option={option}
-            onClick={selectOption(option, value)}
-            isSelected={isOptionSelected(option, value)}
+            onClick={handleOptionClick(option)}
+            isSelected={isOptionSelected(option)}
           />
         ))}
       </Dropdown>

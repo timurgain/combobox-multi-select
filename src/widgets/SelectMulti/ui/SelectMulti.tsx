@@ -1,38 +1,46 @@
 import { Select } from '@/features/Select';
-import { OptionBasicType } from '@/shared/ui/OptionBasic/OptionBasic';
+import {
+  OptionFigureCard,
+  OptionFigureCardType,
+} from '@/shared/ui/OptionFigureCard/OptionFigureCard';
 import { useState } from 'react';
+import avatar from '@/shared/assets/images/avatar.png';
+import { Tag as TagFigureCard } from '@/shared/ui/Tag/Tag';
 
 const options = [
-  { value: '1', label: 'Option 1' },
-  { value: '2', label: 'Option 2' },
-  { value: '3', label: 'Option 3' },
-  { value: '4', label: 'Option 4' },
-  { value: '5', label: 'Option 5' },
-  { value: '6', label: 'Option 6' },
-  { value: '7', label: 'Option 7' },
-  { value: '77', label: 'Option 77' },
-  { value: '777', label: 'Option 777' },
+  { value: '1', label: 'Куликов И.', subtitle: 'Subtitle 1', img: avatar },
+  { value: '2', label: 'Кузнецов В.', subtitle: 'Subtitle 2', img: avatar },
+  { value: '3', label: 'Алексеев-Сахаров дель Монтессори.', subtitle: 'Subtitle 3', img: avatar },
+  {
+    value: '4',
+    label: 'Макаров Д.',
+    subtitle: 'Long long very long long long subtitle',
+    img: avatar,
+  },
+  { value: '5', label: 'Сидоров Е.', subtitle: 'Subtitle 5', img: avatar },
+  { value: '6', label: 'Петров Ф.', subtitle: 'Subtitle 6', img: avatar },
+  { value: '7', label: 'Иванов Г.', subtitle: 'Subtitle 7', img: avatar },
+  { value: '77', label: 'Сергеев И.', subtitle: 'Subtitle 77', img: avatar },
+  { value: '777', label: 'Антонов К.', subtitle: 'Subtitle 777', img: avatar },
 ];
 
 export function SelectMulti() {
-  const [value, setValue] = useState<typeof options>([]);
+  const [value, setValue] = useState<OptionFigureCardType[]>([]);
 
   return (
     <article>
-      <Select<OptionBasicType>
+      <Select<OptionFigureCardType>
         title="Multi Select"
         isMultiple={true}
         value={value}
         options={options}
-        onChange={(option) => {
-          setValue(option);
-        }}
+        onChange={setValue}
+        CustomTag={TagFigureCard}
+        CustomOption={OptionFigureCard}
       />
+
       <p style={{ marginTop: '30px' }}>
-        Selected:{' '}
-        {value.map((v) => (
-          <span key={v.value}>{v.label} </span>
-        ))}
+        Selected: {value?.map((v) => <span key={v.value}>{v.label} </span>)}
       </p>
     </article>
   );

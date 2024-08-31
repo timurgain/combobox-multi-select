@@ -1,0 +1,43 @@
+@import '@/shared/styles/index.scss';
+
+.figure {
+  @extend %flex-row-center-start;
+  height: 24px;
+  padding: rem(4px);
+  border-radius: 4px;
+  max-width: 200px;
+  background-color: $purple-110_06;
+}
+
+.caption {
+  overflow: hidden;
+  flex: 1;
+
+  &__label {
+    @include set-font-size(rem(12px), 1.33);
+    @extend %text-overflow-ellipsis;
+    color: $purple-110;
+    padding: 0 rem(2px) 0 rem(4px);
+  }
+}
+
+.remove-btn {
+  display: flex;
+  flex-shrink: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.img {
+  @extend %object-contain-center;
+  width: rem(16px);
+  height: rem(16px);
+  border-radius: 50%;
+}
+
+.icon {
+  @extend %object-contain-center;
+  width: rem(16px);
+  height: rem(16px);
+}

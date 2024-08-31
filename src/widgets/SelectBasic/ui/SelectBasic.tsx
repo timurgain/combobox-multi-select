@@ -6,12 +6,12 @@ const options = [
   { value: '1', label: 'Option 1' },
   { value: '2', label: 'Option 2' },
   { value: '3', label: 'Option 3' },
-  { value: '4', label: 'Option 4 gjhhv hg hjg hj hghjjhghgh kjnjnkjk kl' },
+  { value: '4', label: 'Long long very long long long subtitle' },
   { value: '5', label: 'Option 5' },
 ];
 
 export function SelectBasic() {
-  const [value, setValue] = useState<(typeof options)[0]>(options[0]);
+  const [value, setValue] = useState<OptionBasicType>(options[0]);
 
   return (
     <article>
@@ -20,9 +20,7 @@ export function SelectBasic() {
         isMultiple={false}
         value={value}
         options={options}
-        onChange={(option) => {
-          setValue(option);
-        }}
+        onChange={setValue}
       />
       <p style={{ marginTop: '30px' }}>Selected: {value.label}</p>
     </article>

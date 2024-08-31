@@ -13,7 +13,7 @@ const options = [
   {
     value: '4',
     label: 'Option 4',
-    subtitle: 'Subtitle 4sdfsd fdsfdsfsdfdsfsdf sdf',
+    subtitle: 'Long long very long long long subtitle',
     icon: LetterIcon,
   },
   { value: '5', label: 'Option 5', subtitle: 'Subtitle 5', icon: LetterIcon },
@@ -33,9 +33,7 @@ export function SelectActionSheet() {
         isMultiple={false}
         value={value}
         options={options}
-        onChange={(option) => {
-          setValue(option);
-        }}
+        onChange={setValue}
         CustomOption={OptionFigureCard}
       />
 

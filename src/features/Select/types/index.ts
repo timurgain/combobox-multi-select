@@ -1,4 +1,4 @@
-import { OptionComponentPropsType } from '@/shared/types';
+import { OptionComponentPropsType, TagComponentPropsType } from '@/shared/types';
 import { DropdownProps } from '@/shared/ui/DropdownDefault/DropdownDefault';
 
 export type SingleProps<T> = {
@@ -7,8 +7,9 @@ export type SingleProps<T> = {
   value: T | null;
   options: T[];
   onChange: (option: T) => void;
-  CustomDropdown?: React.ComponentType<Omit<DropdownProps, 'kit'>>;
+  CustomTag?: React.ComponentType<TagComponentPropsType<T>>;
   CustomOption?: React.ComponentType<OptionComponentPropsType<T>>;
+  CustomDropdown?: React.ComponentType<Omit<DropdownProps, 'kit'>>;
 };
 
 export type MultiProps<T> = {
@@ -17,8 +18,9 @@ export type MultiProps<T> = {
   value: T[] | null;
   options: T[];
   onChange: (option: T[]) => void;
-  CustomDropdown?: React.ComponentType<Omit<DropdownProps, 'kit'>>;
+  CustomTag?: React.ComponentType<TagComponentPropsType<T>>;
   CustomOption?: React.ComponentType<OptionComponentPropsType<T>>;
+  CustomDropdown?: React.ComponentType<Omit<DropdownProps, 'kit'>>;
 };
 
 export type SelectProps<T> = SingleProps<T> | MultiProps<T>;
