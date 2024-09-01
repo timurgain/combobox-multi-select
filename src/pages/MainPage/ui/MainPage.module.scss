@@ -2,7 +2,7 @@
 
 .main {
   @extend %bp-width;
-  @extend %flex-row-center-start;
+  @extend %flex-row-start-start;
   padding: rem(24px) 0;
   gap: 24px;
 }

@@ -16,6 +16,5 @@
 
   & > p {
     @extend %text-overflow-ellipsis;
-    flex: 1;
   }
 }

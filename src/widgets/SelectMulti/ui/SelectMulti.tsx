@@ -6,6 +6,7 @@ import {
 import { useState } from 'react';
 import avatar from '@/shared/assets/images/avatar.png';
 import { Tag as TagFigureCard } from '@/shared/ui/Tag/Tag';
+import { SelectedResult } from '@/shared/ui/SelectedResult/SelectedResult';
 
 const options = [
   { value: '1', label: 'Куликов И.', subtitle: 'Subtitle 1', img: avatar },
@@ -39,9 +40,7 @@ export function SelectMulti() {
         CustomOption={OptionFigureCard}
       />
 
-      <p style={{ marginTop: '30px' }}>
-        Selected: {value?.map((v) => <span key={v.value}>{v.label} </span>)}
-      </p>
+      <SelectedResult value={value} />
     </article>
   );
 }

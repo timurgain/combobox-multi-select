@@ -1,5 +1,6 @@
 import { Select } from '@/features/Select';
 import { OptionBasicType } from '@/shared/ui/OptionBasic/OptionBasic';
+import { SelectedResult } from '@/shared/ui/SelectedResult/SelectedResult';
 import { useState } from 'react';
 
 const optionsInitial = [
@@ -27,9 +28,7 @@ export function SelectComboBox() {
         onChange={setValue}
       />
 
-      <p style={{ marginTop: '30px' }}>
-        Selected: {value?.map((v) => <span key={v.value}>{v.label} </span>)}
-      </p>
+      <SelectedResult value={value} />
     </article>
   );
 }

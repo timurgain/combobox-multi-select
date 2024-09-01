@@ -6,7 +6,9 @@
     background-color: transparent;
     border: none;
     color: $grey-19_40;
+    @extend %text-overflow-ellipsis;
     flex-grow: 1;
-    text-overflow: ellipsis;
+    flex-basis: 20%;
+    min-width: 20%;
   }
 }

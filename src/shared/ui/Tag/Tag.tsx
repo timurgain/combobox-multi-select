@@ -20,7 +20,12 @@ export function Tag({ option, remove }: Props) {
   };
 
   return (
-    <figure className={styles.figure}>
+    <figure
+      className={styles.figure}
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+    >
       {renderFigure()}
 
       <figcaption className={styles['caption']}>

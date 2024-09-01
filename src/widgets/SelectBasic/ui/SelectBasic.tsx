@@ -1,5 +1,6 @@
 import { Select } from '@/features/Select';
 import { OptionBasicType } from '@/shared/ui/OptionBasic/OptionBasic';
+import { SelectedResult } from '@/shared/ui/SelectedResult/SelectedResult';
 import { useState } from 'react';
 
 const options = [
@@ -22,7 +23,8 @@ export function SelectBasic() {
         options={options}
         onChange={setValue}
       />
-      <p style={{ marginTop: '30px' }}>Selected: {value.label}</p>
+
+      <SelectedResult value={value} />
     </article>
   );
 }

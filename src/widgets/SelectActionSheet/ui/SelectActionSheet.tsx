@@ -5,6 +5,7 @@ import {
 } from '@/shared/ui/OptionFigureCard/OptionFigureCard';
 import { useState } from 'react';
 import LetterIcon from '@/shared/assets/icons/letter.svg';
+import { SelectedResult } from '@/shared/ui/SelectedResult/SelectedResult';
 
 const options = [
   { value: '1', label: 'Option 1', subtitle: 'Subtitle 1', icon: LetterIcon },
@@ -37,9 +38,7 @@ export function SelectActionSheet() {
         CustomOption={OptionFigureCard}
       />
 
-      <p style={{ marginTop: '30px' }}>
-        Selected: <span>{value?.label} </span>
-      </p>
+      <SelectedResult value={value} />
     </article>
   );
 }
