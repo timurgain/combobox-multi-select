@@ -3,8 +3,7 @@
 .main {
   @extend %bp-width;
   @extend %flex-col-center-center;
-  padding: rem(24px) 0;
-  gap: rem(12px);
+  gap: 12px;
   height: 180vh;
 
   &__title {
@@ -13,7 +12,7 @@
   }
 
   &__subtitle {
-    @include set-font-size(rem(24px), 1.33);
+    @include set-font-size(rem(27px), 1.33);
     color: $grey-19_40;
   }
 
@@ -22,16 +21,16 @@
     @extend %flex-row-start-center;
     gap: 24px;
     width: 100%;
-  }
 
-  @include max-1(xxl) {
-    flex-wrap: wrap;
-    row-gap: 60px;
-    column-gap: 16px;
-  }
+    @include max-1(xxl) {
+      flex-wrap: wrap;
+      row-gap: 76px;
+      column-gap: 16px;
+    }
 
-  @include max-1(md) {
-    flex-wrap: wrap;
-    row-gap: 40px;
+    @include max-1(md) {
+      flex-wrap: wrap;
+      row-gap: 56px;
+    }
   }
 }
