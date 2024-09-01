@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 type Props<T extends OptionBasicType> = {
   value: T | T[] | null;
   options: T[];
+  optionRefs: React.MutableRefObject<HTMLElement[]>;
   isMultiple?: boolean;
   updSelected: (option: T | T[]) => void;
   postOption?: (option: T) => void;
@@ -14,6 +15,7 @@ type Props<T extends OptionBasicType> = {
 export function useSelectComponent<T extends OptionBasicType>({
   value,
   options,
+  optionRefs,
   isMultiple,
   updSelected,
   postOption,
@@ -22,11 +24,12 @@ export function useSelectComponent<T extends OptionBasicType>({
   const FILTER_OPTIONS_DELEAY = 200;
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [filteredOptions, setFilteredOptions] = useState(options);
+  const [error, setError] = useState<string | null>(null);
+  const [focusedOptionIndex, setFocusedOptionIndex] = useState<number | null>(null);
   const [placeholderValue, setPlaceholderValue] = useState(
     !Array.isArray(value) ? value?.label : ''
   );
-  const [filteredOptions, setFilteredOptions] = useState(options);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const filterOptionsDebounced = debounce(
@@ -52,6 +55,19 @@ export function useSelectComponent<T extends OptionBasicType>({
   useEffect(() => {
     if (!filteredOptions.length && !postOption) setIsOpen(false);
   }, [filteredOptions, postOption]);
+
+  useEffect(() => {
+    if (focusedOptionIndex !== null && optionRefs.current[focusedOptionIndex]) {
+      optionRefs.current[focusedOptionIndex].scrollIntoView({
+        block: 'nearest',
+        inline: 'nearest',
+      });
+    }
+  }, [focusedOptionIndex, optionRefs]);
+
+  useEffect(() => {
+    setFocusedOptionIndex(null);
+  }, [filteredOptions]);
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,6 +135,57 @@ export function useSelectComponent<T extends OptionBasicType>({
     [postOption, toggleSelection]
   );
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      // if (!isOpen) return;
+      switch (e.key) {
+        case 'ArrowDown':
+          setFocusedOptionIndex((prevIndex) =>
+            prevIndex === null || prevIndex === filteredOptions.length - 1 ? 0 : prevIndex + 1
+          );
+          break;
+
+        case 'ArrowUp':
+          setFocusedOptionIndex((prevIndex) =>
+            prevIndex === null || prevIndex === 0 ? filteredOptions.length - 1 : prevIndex - 1
+          );
+          break;
+
+        case 'Enter':
+          if (!isOpen) {
+            setIsOpen(true);
+            break;
+          }
+          if (focusedOptionIndex !== null && filteredOptions[focusedOptionIndex]) {
+            toggleSelection(filteredOptions[focusedOptionIndex]);
+            closeDropdown();
+            setInputValue('');
+          }
+          if (!filteredOptions.length && inputValue) {
+            createOption(inputValue);
+            closeDropdown();
+          }
+          break;
+
+        case 'Escape':
+          closeDropdown();
+          break;
+
+        default:
+          break;
+      }
+    },
+    [
+      isOpen,
+      focusedOptionIndex,
+      filteredOptions,
+      inputValue,
+      closeDropdown,
+      toggleSelection,
+      createOption,
+    ]
+  );
+
   return {
     isOpen,
     inputValue,
@@ -128,9 +195,11 @@ export function useSelectComponent<T extends OptionBasicType>({
     toggleSelection,
     toggleDropdown,
     closeDropdown,
+    focusedOptionIndex,
     handleOptionClick,
     isOptionSelected,
     createOption,
+    handleKeyDown,
     error,
   };
 }

@@ -12,6 +12,7 @@ import { TitleLabel } from '@/shared/ui/InputLabel/TitleLabel';
 import { SelectProps } from '../types';
 import { Tag as TagDefault } from '@/shared/ui/Tag/Tag';
 import clsx from 'clsx';
+import { useRef } from 'react';
 
 export function Select<T extends OptionBasicType>({
   title,
@@ -31,6 +32,9 @@ export function Select<T extends OptionBasicType>({
   const Option = CustomOption || OptionBasic;
   const Dropdown = CustomDropdown || DropdownDefault;
 
+  const dropdownRef = useRef<HTMLUListElement>(null);
+  const optionRefs = useRef<HTMLElement[]>([]);
+
   const updSelected = (option: T | T[]) =>
     isMultiple ? onChange(option as T[]) : onChange(option as T);
 
@@ -44,10 +48,20 @@ export function Select<T extends OptionBasicType>({
     toggleDropdown,
     closeDropdown,
     handleOptionClick,
+    focusedOptionIndex,
     isOptionSelected,
     createOption,
+    handleKeyDown,
     error,
-  } = useSelectComponent<T>({ value, options, isMultiple, updSelected, postOption, externalError });
+  } = useSelectComponent<T>({
+    value,
+    options,
+    optionRefs,
+    isMultiple,
+    updSelected,
+    postOption,
+    externalError,
+  });
 
   const hintMsg = () => {
     const msg = error || hint;
@@ -79,6 +93,7 @@ export function Select<T extends OptionBasicType>({
         <Input
           value={inputValue}
           onChange={handleInputChange}
+          onKeyDown={(e) => handleKeyDown(e)}
           placeholder={placeholderValue}
           labelFor={title.replace(' ', '-').toLowerCase()}
           disabled={isDisabled}
@@ -95,13 +110,17 @@ export function Select<T extends OptionBasicType>({
         {hintMsg()}
       </InputBox>
 
-      <Dropdown kit={DropdownKits.SINGLE_SELECT} isOpen={isOpen}>
-        {filteredOptions.map((option) => (
+      <Dropdown kit={DropdownKits.SINGLE_SELECT} isOpen={isOpen} ref={dropdownRef}>
+        {filteredOptions.map((option, index) => (
           <Option
+            ref={(element: HTMLLIElement) => {
+              optionRefs.current[index] = element;
+            }}
             key={option.value}
             option={option}
             onClick={handleOptionClick(option)}
             isSelected={isOptionSelected(option)}
+            isFocused={focusedOptionIndex === index}
           />
         ))}
 

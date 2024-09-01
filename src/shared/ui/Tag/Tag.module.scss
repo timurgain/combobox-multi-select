@@ -27,6 +27,10 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+
+  &:focus {
+    outline: 1px solid $purple-110_48;
+  }
 }
 
 .img {

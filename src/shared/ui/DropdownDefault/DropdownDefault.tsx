@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import styles from './DropdownDefault.module.scss';
+import { forwardRef } from 'react';
 
 export enum DropdownKits {
   SINGLE_SELECT = 'single-select',
@@ -11,14 +12,18 @@ export type DropdownProps = {
   children: React.ReactNode;
 };
 
-export function DropdownDefault({ kit, isOpen, children }: DropdownProps) {
-  return (
-    <ul
-      className={clsx(styles.dropdown, styles[`dropdown_kit_${kit}`], {
-        [styles[`dropdown_open`]]: isOpen,
-      })}
-    >
-      {children}
-    </ul>
-  );
-}
+export const DropdownDefault = forwardRef<HTMLUListElement, DropdownProps>(
+  ({ kit, isOpen, children }, ref) => {
+    return (
+      <ul
+        ref={ref}
+        role="listbox"
+        className={clsx(styles.dropdown, styles[`dropdown_kit_${kit}`], {
+          [styles[`dropdown_open`]]: isOpen,
+        })}
+      >
+        {children}
+      </ul>
+    );
+  }
+);

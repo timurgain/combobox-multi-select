@@ -7,6 +7,10 @@
     cursor: pointer;
   }
 
+  &:focus {
+    outline: 1px solid $purple-110_48;
+  }
+
   &_kit_clear {
     background-color: transparent;
     border: none;

@@ -14,6 +14,7 @@ type Props = {
   type?: ImportTypes;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   placeholder?: string;
   className?: string;
   disabled?: boolean;
@@ -25,6 +26,7 @@ export function Input({
   type = ImportTypes.TEXT,
   value,
   onChange,
+  onKeyDown,
   placeholder,
   className,
   disabled = false,
@@ -36,6 +38,7 @@ export function Input({
       type={type}
       value={value}
       onChange={onChange}
+      onKeyDown={onKeyDown}
       placeholder={placeholder ?? ''}
       disabled={disabled}
       id={labelFor}
