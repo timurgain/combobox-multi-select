@@ -6,6 +6,15 @@
   border-radius: 8px;
   width: 100%;
 
+  &_error {
+    border-color: $red-232;
+    outline: 3px solid $red-232_012;
+  }
+
+  &_disabled {
+    border-color: $grey-19_10;
+  }
+
   &_kit_single-select {
     @extend %flex-row-center-between;
     gap: rem(10px);

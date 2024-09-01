@@ -26,6 +26,7 @@ export function SelectComboBox() {
         }}
         options={options}
         onChange={setValue}
+        hint="Hint"
       />
 
       <SelectedResult value={value} />

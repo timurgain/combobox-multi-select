@@ -11,12 +11,16 @@ import { useSelectComponent } from '../hooks/useSelectComponent';
 import { TitleLabel } from '@/shared/ui/InputLabel/TitleLabel';
 import { SelectProps } from '../types';
 import { Tag as TagDefault } from '@/shared/ui/Tag/Tag';
+import clsx from 'clsx';
 
 export function Select<T extends OptionBasicType>({
   title,
   isMultiple,
+  isDisabled,
   value,
   options,
+  externalError,
+  hint,
   postOption,
   onChange,
   CustomTag,
@@ -42,7 +46,18 @@ export function Select<T extends OptionBasicType>({
     handleOptionClick,
     isOptionSelected,
     createOption,
-  } = useSelectComponent<T>({ value, options, isMultiple, updSelected, postOption });
+    error,
+  } = useSelectComponent<T>({ value, options, isMultiple, updSelected, postOption, externalError });
+
+  const hintMsg = () => {
+    const msg = error || hint;
+    if (isOpen || !msg) return;
+    return (
+      <p className={clsx({ [styles['hint-text']]: !!hint }, { [styles['error-text']]: !!error })}>
+        {msg}
+      </p>
+    );
+  };
 
   return (
     <section className={styles.section}>
@@ -52,28 +67,21 @@ export function Select<T extends OptionBasicType>({
         kit={isMultiple ? InputBoxKits.MULTI_SELECT : InputBoxKits.SINGLE_SELECT}
         onBlur={closeDropdown}
         onClick={toggleDropdown}
+        isError={!!error}
+        isDisabled={isDisabled}
       >
         {isMultiple && Array.isArray(value) && value.length < 1 && <SearchIcon />}
 
-        {isMultiple ? (
-          <>
-            {value?.map((v) => <Tag key={v.value} option={v} remove={() => toggleSelection(v)} />)}
+        {isMultiple &&
+          value?.map((v) => <Tag key={v.value} option={v} remove={() => toggleSelection(v)} />)}
 
-            <Input
-              value={inputValue}
-              onChange={handleInputChange}
-              placeholder="Type here"
-              labelFor={title.replace(' ', '-').toLowerCase()}
-            />
-          </>
-        ) : (
-          <Input
-            value={inputValue}
-            onChange={handleInputChange}
-            placeholder={placeholderValue}
-            labelFor="select-input-basic"
-          />
-        )}
+        <Input
+          value={inputValue}
+          onChange={handleInputChange}
+          placeholder={placeholderValue}
+          labelFor={title.replace(' ', '-').toLowerCase()}
+          disabled={isDisabled}
+        />
 
         {!isMultiple && (
           <Button kit={ButtonKits.CLEAR}>
@@ -82,6 +90,8 @@ export function Select<T extends OptionBasicType>({
             />
           </Button>
         )}
+
+        {hintMsg()}
       </InputBox>
 
       <Dropdown kit={DropdownKits.SINGLE_SELECT} isOpen={isOpen}>
@@ -103,12 +113,6 @@ export function Select<T extends OptionBasicType>({
             <AddIcon />
             <p>Создать «{inputValue}»</p>
           </Button>
-        )}
-
-        {!filteredOptions.length && !postOption && inputValue && (
-          <div className={styles['add-on']}>
-            <p>Не найдено «{inputValue}»</p>
-          </div>
         )}
       </Dropdown>
     </section>

@@ -8,6 +8,7 @@ type Props<T extends OptionBasicType> = {
   isMultiple?: boolean;
   updSelected: (option: T | T[]) => void;
   postOption?: (option: T) => void;
+  externalError?: string;
 };
 
 export function useSelectComponent<T extends OptionBasicType>({
@@ -16,6 +17,7 @@ export function useSelectComponent<T extends OptionBasicType>({
   isMultiple,
   updSelected,
   postOption,
+  externalError,
 }: Props<T>) {
   const FILTER_OPTIONS_DELEAY = 200;
   const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +26,7 @@ export function useSelectComponent<T extends OptionBasicType>({
     !Array.isArray(value) ? value?.label : ''
   );
   const [filteredOptions, setFilteredOptions] = useState(options);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const filterOptionsDebounced = debounce(
@@ -36,10 +39,28 @@ export function useSelectComponent<T extends OptionBasicType>({
     filterOptionsDebounced(inputValue);
   }, [inputValue, options]);
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-    setIsOpen(true);
-  }, []);
+  useEffect(() => {
+    if (externalError) {
+      setError(externalError);
+    } else if (inputValue && !filteredOptions.length && !postOption) {
+      setError('No matches found');
+    } else {
+      setError(null);
+    }
+  }, [inputValue, filteredOptions, externalError, postOption]);
+
+  useEffect(() => {
+    if (!filteredOptions.length) setIsOpen(false);
+  }, [filteredOptions]);
+
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      setInputValue(value);
+      if (filteredOptions.length) setIsOpen(true);
+    },
+    [filteredOptions]
+  );
 
   const toggleDropdown = useCallback(() => {
     setIsOpen(!isOpen);
@@ -110,5 +131,6 @@ export function useSelectComponent<T extends OptionBasicType>({
     handleOptionClick,
     isOptionSelected,
     createOption,
+    error,
   };
 }

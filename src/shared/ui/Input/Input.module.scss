@@ -11,4 +11,8 @@
     flex-basis: 20%;
     min-width: 20%;
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
