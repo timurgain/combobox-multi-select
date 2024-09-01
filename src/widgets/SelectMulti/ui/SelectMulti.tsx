@@ -7,6 +7,7 @@ import { useState } from 'react';
 import avatar from '@/shared/assets/images/avatar.png';
 import { Tag as TagFigureCard } from '@/shared/ui/Tag/Tag';
 import { SelectedResult } from '@/shared/ui/SelectedResult/SelectedResult';
+import { ContainerDemo } from '@/shared/ui/ContainerDemo/ContainerDemo';
 
 const options = [
   { value: '1', label: 'Куликов И.', subtitle: 'Subtitle 1', img: avatar },
@@ -29,7 +30,7 @@ export function SelectMulti() {
   const [value, setValue] = useState<OptionFigureCardType[]>([]);
 
   return (
-    <article>
+    <ContainerDemo>
       <Select<OptionFigureCardType>
         title="Multi Select"
         isMultiple={true}
@@ -42,6 +43,6 @@ export function SelectMulti() {
       />
 
       <SelectedResult value={value} />
-    </article>
+    </ContainerDemo>
   );
 }

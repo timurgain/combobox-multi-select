@@ -6,6 +6,7 @@ import {
 import { useState } from 'react';
 import LetterIcon from '@/shared/assets/icons/letter.svg';
 import { SelectedResult } from '@/shared/ui/SelectedResult/SelectedResult';
+import { ContainerDemo } from '@/shared/ui/ContainerDemo/ContainerDemo';
 
 const options = [
   { value: '1', label: 'Option 1', subtitle: 'Subtitle 1', icon: LetterIcon },
@@ -28,7 +29,7 @@ export function SelectActionSheet() {
   const [value, setValue] = useState<OptionFigureCardType | null>(null);
 
   return (
-    <article>
+    <ContainerDemo>
       <Select<OptionFigureCardType>
         title="Action sheet"
         isMultiple={false}
@@ -40,6 +41,6 @@ export function SelectActionSheet() {
       />
 
       <SelectedResult value={value} />
-    </article>
+    </ContainerDemo>
   );
 }

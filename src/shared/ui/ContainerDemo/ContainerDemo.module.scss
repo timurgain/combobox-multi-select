@@ -1,0 +1,6 @@
+@import '@/shared/styles/index.scss';
+
+.demo {
+  @extend %flex-col-start-start;
+  gap: 36px;
+}

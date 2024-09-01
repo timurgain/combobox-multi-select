@@ -1,4 +1,5 @@
 import { Select } from '@/features/Select';
+import { ContainerDemo } from '@/shared/ui/ContainerDemo/ContainerDemo';
 import { OptionBasicType } from '@/shared/ui/OptionBasic/OptionBasic';
 import { SelectedResult } from '@/shared/ui/SelectedResult/SelectedResult';
 import { useState } from 'react';
@@ -15,7 +16,7 @@ export function SelectBasic() {
   const [value, setValue] = useState<OptionBasicType>(options[0]);
 
   return (
-    <article>
+    <ContainerDemo>
       <Select<OptionBasicType>
         title="Select Basic"
         isMultiple={false}
@@ -26,6 +27,6 @@ export function SelectBasic() {
       />
 
       <SelectedResult value={value} />
-    </article>
+    </ContainerDemo>
   );
 }

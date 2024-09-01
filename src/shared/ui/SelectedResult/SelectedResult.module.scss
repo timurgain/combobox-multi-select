@@ -2,8 +2,9 @@
 
 .section {
   @extend %flex-col-start-start;
-  color: $grey-19_90;
   gap: 4px;
+  width: 100%;
+  color: $grey-19_90;
   background-color: $purple-110_03;
   border-radius: 8px;
   padding: rem(8px);

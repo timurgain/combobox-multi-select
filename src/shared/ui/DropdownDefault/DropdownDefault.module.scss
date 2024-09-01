@@ -1,6 +1,10 @@
 @import '@/shared/styles/index.scss';
 
 .dropdown {
+  position: absolute;
+  z-index: 10;
+  background-color: $white-255;
+
   @extend %flex-col-start-start;
   padding: rem(4px);
   gap: rem(4px);

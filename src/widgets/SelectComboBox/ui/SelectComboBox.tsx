@@ -1,4 +1,5 @@
 import { Select } from '@/features/Select';
+import { ContainerDemo } from '@/shared/ui/ContainerDemo/ContainerDemo';
 import { OptionBasicType } from '@/shared/ui/OptionBasic/OptionBasic';
 import { SelectedResult } from '@/shared/ui/SelectedResult/SelectedResult';
 import { useState } from 'react';
@@ -16,7 +17,7 @@ export function SelectComboBox() {
   const [value, setValue] = useState<OptionBasicType[]>([]);
 
   return (
-    <article>
+    <ContainerDemo>
       <Select<OptionBasicType>
         title="Combobox & Multi Select & Post Option"
         isMultiple={true}
@@ -30,6 +31,6 @@ export function SelectComboBox() {
       />
 
       <SelectedResult value={value} />
-    </article>
+    </ContainerDemo>
   );
 }

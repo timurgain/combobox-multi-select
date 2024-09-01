@@ -13,6 +13,7 @@ import { SelectProps } from '../types';
 import { Tag as TagDefault } from '@/shared/ui/Tag/Tag';
 import clsx from 'clsx';
 import { useRef } from 'react';
+import { useDropdownPosition } from '../hooks/useDropdownPosition';
 
 export function Select<T extends OptionBasicType>({
   title,
@@ -32,8 +33,9 @@ export function Select<T extends OptionBasicType>({
   const Option = CustomOption || OptionBasic;
   const Dropdown = CustomDropdown || DropdownDefault;
 
-  const dropdownRef = useRef<HTMLUListElement>(null);
   const optionRefs = useRef<HTMLElement[]>([]);
+  const dropdownRef = useRef<HTMLUListElement>(null);
+  const inputBoxRef = useRef<HTMLDivElement>(null);
 
   const updSelected = (option: T | T[]) =>
     isMultiple ? onChange(option as T[]) : onChange(option as T);
@@ -63,6 +65,8 @@ export function Select<T extends OptionBasicType>({
     externalError,
   });
 
+  const { dropdownStyles } = useDropdownPosition({ isOpen, inputBoxRef, dropdownRef });
+
   const hintMsg = () => {
     const msg = error || hint;
     if (isOpen || !msg) return;
@@ -78,6 +82,7 @@ export function Select<T extends OptionBasicType>({
       <TitleLabel text={title} htmlFor={title.replace(' ', '-').toLowerCase()} />
 
       <InputBox
+        ref={inputBoxRef}
         kit={isMultiple ? InputBoxKits.MULTI_SELECT : InputBoxKits.SINGLE_SELECT}
         onBlur={closeDropdown}
         onClick={toggleDropdown}
@@ -114,6 +119,7 @@ export function Select<T extends OptionBasicType>({
         kit={isMultiple ? DropdownKits.MULTI_SELECT : DropdownKits.SINGLE_SELECT}
         isOpen={isOpen}
         ref={dropdownRef}
+        style={dropdownStyles}
       >
         {filteredOptions.map((option, index) => (
           <Option

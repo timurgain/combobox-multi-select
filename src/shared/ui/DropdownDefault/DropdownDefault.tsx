@@ -10,15 +10,17 @@ export enum DropdownKits {
 export type DropdownProps = {
   kit?: DropdownKits;
   isOpen: boolean;
+  style: React.CSSProperties;
   children: React.ReactNode;
 };
 
 export const DropdownDefault = forwardRef<HTMLUListElement, DropdownProps>(
-  ({ kit, isOpen, children }, ref) => {
+  ({ kit, isOpen, style, children }, ref) => {
     return (
       <ul
         ref={ref}
         role="listbox"
+        style={style}
         className={clsx(styles.dropdown, styles[`dropdown_kit_${kit}`], {
           [styles[`dropdown_open`]]: isOpen,
         })}
