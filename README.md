@@ -2,7 +2,14 @@
 
 ## Description
 
-Custom React Combobox-Multi-Select component.
+Custom React Combobox-Multi-Select component provides features:
+
+- Filter and select multiple items from the list
+- Add / Post options to the list
+- Hint and error messages
+- Customizable components like Option, Tag, and Dropdown
+- Positioning of the dropdown according to the viewport
+- Keyboard accessibility
 
 ## Technologies
 
@@ -12,11 +19,10 @@ Custom React Combobox-Multi-Select component.
 - SCSS
 - ESlint, Prettier
 - Husky pre-commit
-- Feature-sliced-design
 
 ## Installation and running
 
-TODO: [Go to Demo]() or install and run it locally:
+[Go to Demo page](https://timurgain.github.io/combobox-multi-select/) or install and run it locally:
 
 ```
 1. $ git clone https://github.com/timurgain/combobox-multi-select.git

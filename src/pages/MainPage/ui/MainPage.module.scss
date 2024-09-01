@@ -4,7 +4,7 @@
   @extend %bp-width;
   @extend %flex-col-center-center;
   gap: 12px;
-  height: 180vh;
+  height: 160vh;
 
   &__title {
     @include set-font-size(rem(18px), 1.33);
