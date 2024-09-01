@@ -7,7 +7,7 @@ const optionsInitial = [
   { value: '1', label: 'Option 1' },
   { value: '2', label: 'Option 2' },
   { value: '3', label: 'Option 3' },
-  { value: '4', label: 'Long long very long long long subtitle' },
+  { value: '4', label: 'Long long long long long label' },
   { value: '5', label: 'Option 5' },
 ];
 
@@ -18,7 +18,7 @@ export function SelectComboBox() {
   return (
     <article>
       <Select<OptionBasicType>
-        title="Combobox"
+        title="Combobox & Multi Select & Post Option"
         isMultiple={true}
         value={value}
         postOption={(option) => {

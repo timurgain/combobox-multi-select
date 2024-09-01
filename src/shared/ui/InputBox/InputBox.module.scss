@@ -5,6 +5,7 @@
   border: 1px solid $grey-19_10;
   border-radius: 8px;
   width: 100%;
+  min-width: 292px;
 
   &_error {
     border-color: $red-232;

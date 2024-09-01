@@ -4,6 +4,7 @@ import { forwardRef } from 'react';
 
 export enum DropdownKits {
   SINGLE_SELECT = 'single-select',
+  MULTI_SELECT = 'multi-select',
 }
 
 export type DropdownProps = {

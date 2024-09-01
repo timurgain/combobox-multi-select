@@ -110,7 +110,11 @@ export function Select<T extends OptionBasicType>({
         {hintMsg()}
       </InputBox>
 
-      <Dropdown kit={DropdownKits.SINGLE_SELECT} isOpen={isOpen} ref={dropdownRef}>
+      <Dropdown
+        kit={isMultiple ? DropdownKits.MULTI_SELECT : DropdownKits.SINGLE_SELECT}
+        isOpen={isOpen}
+        ref={dropdownRef}
+      >
         {filteredOptions.map((option, index) => (
           <Option
             ref={(element: HTMLLIElement) => {

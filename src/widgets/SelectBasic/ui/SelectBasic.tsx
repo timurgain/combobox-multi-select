@@ -7,7 +7,7 @@ const options = [
   { value: '1', label: 'Option 1' },
   { value: '2', label: 'Option 2' },
   { value: '3', label: 'Option 3' },
-  { value: '4', label: 'Long long very long long long subtitle' },
+  { value: '4', label: 'Option 4' },
   { value: '5', label: 'Option 5' },
 ];
 
@@ -22,6 +22,7 @@ export function SelectBasic() {
         value={value}
         options={options}
         onChange={setValue}
+        hint="Hint"
       />
 
       <SelectedResult value={value} />

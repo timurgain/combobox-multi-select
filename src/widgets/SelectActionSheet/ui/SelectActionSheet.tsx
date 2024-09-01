@@ -36,6 +36,7 @@ export function SelectActionSheet() {
         options={options}
         onChange={setValue}
         CustomOption={OptionFigureCard}
+        hint="Hint"
       />
 
       <SelectedResult value={value} />

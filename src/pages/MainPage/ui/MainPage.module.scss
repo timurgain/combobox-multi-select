@@ -2,7 +2,18 @@
 
 .main {
   @extend %bp-width;
-  @extend %flex-row-start-start;
+  @extend %flex-row-start-center;
   padding: rem(24px) 0;
   gap: 24px;
+
+  @include max-1(xxl) {
+    flex-wrap: wrap;
+    row-gap: 60px;
+    column-gap: 16px;
+  }
+
+  @include max-1(md) {
+    flex-wrap: wrap;
+    row-gap: 40px;
+  }
 }

@@ -11,11 +11,11 @@ import { SelectedResult } from '@/shared/ui/SelectedResult/SelectedResult';
 const options = [
   { value: '1', label: 'Куликов И.', subtitle: 'Subtitle 1', img: avatar },
   { value: '2', label: 'Кузнецов В.', subtitle: 'Subtitle 2', img: avatar },
-  { value: '3', label: 'Алексеев-Сахаров дель Монтессори.', subtitle: 'Subtitle 3', img: avatar },
+  { value: '3', label: 'Алексеев-Сахаров Монтессори', subtitle: 'Subtitle 3', img: avatar },
   {
     value: '4',
     label: 'Макаров Д.',
-    subtitle: 'Long long very long long long subtitle',
+    subtitle: 'Long long long long long subtitle',
     img: avatar,
   },
   { value: '5', label: 'Сидоров Е.', subtitle: 'Subtitle 5', img: avatar },
@@ -38,6 +38,7 @@ export function SelectMulti() {
         onChange={setValue}
         CustomTag={TagFigureCard}
         CustomOption={OptionFigureCard}
+        hint="Hint"
       />
 
       <SelectedResult value={value} />
