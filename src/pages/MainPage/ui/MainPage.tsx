@@ -7,10 +7,14 @@ import { SelectComboBox } from '@/widgets/SelectComboBox';
 export function MainPage() {
   return (
     <main className={styles.main}>
-      <SelectBasic />
-      <SelectActionSheet />
-      <SelectMulti />
-      <SelectComboBox />
+      <h1 className={styles.main__title}>Custom Select demo</h1>
+      <p className={styles.main__subtitle}>Scroll to test a Dropdown position</p>
+      <div className={styles['main__content']}>
+        <SelectBasic />
+        <SelectActionSheet />
+        <SelectMulti />
+        <SelectComboBox />
+      </div>
     </main>
   );
 }

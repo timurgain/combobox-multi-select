@@ -2,9 +2,27 @@
 
 .main {
   @extend %bp-width;
-  @extend %flex-row-start-center;
+  @extend %flex-col-center-center;
   padding: rem(24px) 0;
-  gap: 24px;
+  gap: rem(12px);
+  height: 180vh;
+
+  &__title {
+    @include set-font-size(rem(18px), 1.33);
+    color: $grey-19_40;
+  }
+
+  &__subtitle {
+    @include set-font-size(rem(24px), 1.33);
+    color: $grey-19_40;
+  }
+
+  &__content {
+    margin-top: 36px;
+    @extend %flex-row-start-center;
+    gap: 24px;
+    width: 100%;
+  }
 
   @include max-1(xxl) {
     flex-wrap: wrap;
