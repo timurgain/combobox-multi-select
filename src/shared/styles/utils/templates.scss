@@ -1,0 +1,77 @@
+// FLEX
+
+%flex-row-center-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+%flex-row-center-start {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+%flex-row-start-start {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+%flex-row-start-center {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+%flex-row-center-between {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+%flex-col-center-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+%flex-col-center-start {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+%flex-col-start-start {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+// Objects fit
+
+%object-cover-center {
+  object-fit: cover;
+  object-position: center;
+}
+
+%object-contain-center {
+  object-fit: contain;
+  object-position: center;
+}
+
+// Text
+
+%text-overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

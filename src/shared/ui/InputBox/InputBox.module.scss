@@ -1,0 +1,42 @@
+@import '@/shared/styles/index.scss';
+
+.box {
+  position: relative;
+  border: 1px solid $grey-19_10;
+  border-radius: 8px;
+  width: 100%;
+  min-width: 292px;
+
+  &_error {
+    border-color: $red-232;
+    outline: 3px solid $red-232_012;
+  }
+
+  &_disabled {
+    border-color: $grey-19_10;
+  }
+
+  &_kit_single-select {
+    @extend %flex-row-center-between;
+    gap: rem(10px);
+    padding: rem(11px) rem(12px);
+    max-width: 292px;
+    height: 44px;
+  }
+
+  &_kit_multi-select {
+    @extend %flex-row-center-start;
+    flex-wrap: wrap;
+    gap: rem(10px);
+    padding: rem(8px) rem(8px);
+    max-width: 450px;
+    min-height: 44px;
+  }
+
+  &:hover:not(&_error, &_disabled),
+  &:focus-within:not(&_error, &_disabled),
+  &_active:not(&_error, &_disabled) {
+    border: 1px solid $purple-110_48;
+    outline: 3px solid $purple-113_12;
+  }
+}

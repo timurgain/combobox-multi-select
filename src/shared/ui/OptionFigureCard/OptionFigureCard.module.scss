@@ -1,0 +1,69 @@
+@import '@/shared/styles/index.scss';
+
+.option {
+  @extend %flex-row-center-between;
+  gap: rem(16px);
+  width: 100%;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0 rem(16px) 0 rem(8px);
+
+  &:hover {
+    background-color: $grey-19_05;
+  }
+
+  &:focus {
+    outline: none;
+    background-color: $grey-19_05;
+  }
+
+  &_focused,
+  &_selected {
+    background-color: $grey-19_05;
+  }
+}
+
+.figure {
+  @extend %flex-row-center-start;
+  gap: rem(8px);
+  padding: rem(8px) 0;
+  width: 100%;
+  overflow: hidden;
+  flex: 1;
+}
+
+.img {
+  @extend %object-contain-center;
+  width: rem(32px);
+  height: rem(32px);
+  border-radius: 50%;
+}
+
+.icon {
+  @extend %object-contain-center;
+  width: rem(32px);
+  height: rem(32px);
+}
+
+.caption {
+  @include set-font-size(rem(15px), 1.46);
+  padding-left: rem(4px);
+  overflow: hidden;
+
+  &__label {
+    @include set-font-size(rem(15px), 1.46);
+    color: $grey-19_90;
+    @extend %text-overflow-ellipsis;
+  }
+
+  &__subtitle {
+    @include set-font-size(rem(13px), 1.38);
+    color: $grey-19_40;
+    @extend %text-overflow-ellipsis;
+  }
+}
+
+.mark {
+  width: rem(20px);
+  height: rem(20px);
+}

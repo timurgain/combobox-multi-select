@@ -1,0 +1,18 @@
+@import '@/shared/styles/index.scss';
+
+.input {
+  &_kit_clear {
+    @include set-font-size(rem(16px), 1.46);
+    background-color: transparent;
+    border: none;
+    color: $grey-19_40;
+    @extend %text-overflow-ellipsis;
+    flex-grow: 1;
+    flex-basis: 20%;
+    min-width: 20%;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

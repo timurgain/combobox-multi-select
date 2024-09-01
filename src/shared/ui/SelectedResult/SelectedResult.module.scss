@@ -1,0 +1,15 @@
+@import '@/shared/styles/index.scss';
+
+.section {
+  @extend %flex-col-start-start;
+  gap: 4px;
+  width: 100%;
+  color: $grey-19_90;
+  background-color: $purple-110_03;
+  border-radius: 8px;
+  padding: rem(8px);
+}
+
+.option {
+  padding-left: rem(8px);
+}

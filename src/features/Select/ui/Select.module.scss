@@ -1,0 +1,36 @@
+@import '@/shared/styles/index.scss';
+
+.section {
+  @extend %flex-col-center-start;
+  gap: 8px;
+}
+
+.add-on {
+  @extend %flex-row-center-start;
+  @include set-font-size(rem(15px), 1.46);
+  color: $grey-19_90;
+  gap: 8px;
+  width: 100%;
+  height: auto;
+  padding: rem(6px) rem(12px);
+
+  & > p {
+    @extend %text-overflow-ellipsis;
+  }
+}
+
+.hint-text,
+.error-text {
+  position: absolute;
+  bottom: rem(-24px);
+  left: 0;
+  @include set-font-size(rem(13px), 1.38);
+}
+
+.hint-text {
+  color: $grey-19_40;
+}
+
+.error-text {
+  color: $red-232;
+}
