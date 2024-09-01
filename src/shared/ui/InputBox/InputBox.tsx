@@ -12,17 +12,27 @@ type Props = {
   onBlur?: () => void;
   isError?: boolean;
   isDisabled?: boolean;
+  isDropdownOpen?: boolean;
   children: React.ReactNode;
 };
 
-export function InputBox({ kit, onClick, onBlur, isError, isDisabled, children }: Props) {
+export function InputBox({
+  kit,
+  onClick,
+  onBlur,
+  isError,
+  isDisabled,
+  isDropdownOpen,
+  children,
+}: Props) {
   return (
     <div
       className={clsx(
         styles.box,
         styles[`box_kit_${kit}`],
         { [styles[`box_error`]]: isError },
-        { [styles[`box_disabled`]]: isDisabled }
+        { [styles[`box_disabled`]]: isDisabled },
+        { [styles[`box_active`]]: isDropdownOpen }
       )}
       onClick={onClick}
       onBlur={onBlur}

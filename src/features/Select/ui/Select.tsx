@@ -69,6 +69,7 @@ export function Select<T extends OptionBasicType>({
         onClick={toggleDropdown}
         isError={!!error}
         isDisabled={isDisabled}
+        isDropdownOpen={isOpen}
       >
         {isMultiple && Array.isArray(value) && value.length < 1 && <SearchIcon />}
 

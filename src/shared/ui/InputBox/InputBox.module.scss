@@ -31,4 +31,11 @@
     max-width: 450px;
     min-height: 44px;
   }
+
+  &:hover:not(&_error, &_disabled),
+  &:focus-within:not(&_error, &_disabled),
+  &_active:not(&_error, &_disabled) {
+    border: 1px solid $purple-110_48;
+    outline: 3px solid $purple-113_12;
+  }
 }

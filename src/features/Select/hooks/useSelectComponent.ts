@@ -50,8 +50,8 @@ export function useSelectComponent<T extends OptionBasicType>({
   }, [inputValue, filteredOptions, externalError, postOption]);
 
   useEffect(() => {
-    if (!filteredOptions.length) setIsOpen(false);
-  }, [filteredOptions]);
+    if (!filteredOptions.length && !postOption) setIsOpen(false);
+  }, [filteredOptions, postOption]);
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
